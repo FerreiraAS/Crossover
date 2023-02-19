@@ -5,17 +5,9 @@ rm(list = ls(all = TRUE))
 # most packages work fine if installed from CRAN
 packs.cran <-
   c(
-    "lme4",
-    "nlme",
     "readxl",
-    "effectsize",
-    "gtsummary",
-    "htmlTable",
-    "pwr",
     "table1",
-    "flextable",
-    "pacman",
-    "vioplot"
+    "flextable"
   )
 for (i in 1:length(packs.cran)) {
   if (!require(packs.cran[i], character.only = TRUE, quietly = TRUE))

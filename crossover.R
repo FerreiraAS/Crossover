@@ -1,15 +1,22 @@
 crossover.test <-
-  function(sequence,      # vector
-           AB,            # label
-           BA,            # label
-           pre_F1,        # data
-           post_F1,       # data
-           pre_F2,        # data
-           post_F2,       # data
+  function(sequence,
+           # vector
+           AB,
+           # label
+           BA,
+           # label
+           pre_F1,
+           # data
+           post_F1,
+           # data
+           pre_F2,
+           # data
+           post_F2,
+           # data
            mean.imput,
            alpha,
            carryover.alpha) {
-    
+
     # mean imputation of missing values
     missings <- c()
     banco <- data.frame(pre_F1, post_F1, pre_F2, post_F2)
@@ -47,53 +54,121 @@ crossover.test <-
     X1 <-
       pre_F1[sequence == AB]
     table2[row, 3] <-
-      paste0(format(round(mean(na.omit(X1)), digits), nsmall = digits), " (", format(round(sd(na.omit(X1)), digits), nsmall = digits), ")")
+      paste0(format(round(mean(na.omit(
+        X1
+      )), digits), nsmall = digits),
+      " (",
+      format(round(sd(na.omit(
+        X1
+      )), digits), nsmall = digits),
+      ")")
     X2 <-
       post_F1[sequence == AB]
     table2[row, 4] <-
-      paste0(format(round(mean(na.omit(X2)), digits), nsmall = digits), " (", format(round(sd(na.omit(X2)), digits), nsmall = digits), ")")
+      paste0(format(round(mean(na.omit(
+        X2
+      )), digits), nsmall = digits),
+      " (",
+      format(round(sd(na.omit(
+        X2
+      )), digits), nsmall = digits),
+      ")")
     X3 <-
       pre_F2[sequence == BA]
     table2[row, 5] <-
-      paste0(format(round(mean(na.omit(X3)), digits), nsmall = digits), " (", format(round(sd(na.omit(X3)), digits), nsmall = digits), ")")
+      paste0(format(round(mean(na.omit(
+        X3
+      )), digits), nsmall = digits),
+      " (",
+      format(round(sd(na.omit(
+        X3
+      )), digits), nsmall = digits),
+      ")")
     X4 <-
       post_F2[sequence == BA]
     table2[row, 6] <-
-      paste0(format(round(mean(na.omit(X4)), digits), nsmall = digits), " (", format(round(sd(na.omit(X4)), digits), nsmall = digits), ")")
+      paste0(format(round(mean(na.omit(
+        X4
+      )), digits), nsmall = digits),
+      " (",
+      format(round(sd(na.omit(
+        X4
+      )), digits), nsmall = digits),
+      ")")
     T1 <- mean(na.omit(X1 - X2) + na.omit(X3 - X4))
     ST1 <- sd(na.omit(X1 - X2) + na.omit(X3 - X4))
     table2[row, 7] <-
-      paste0(format(round(T1, digits), nsmall = digits), " (", format(round(ST1, digits), nsmall = digits), ")")
+      paste0(format(round(T1, digits), nsmall = digits),
+             " (",
+             format(round(ST1, digits), nsmall = digits),
+             ")")
     D1 <- mean(na.omit(X1 - X2) - na.omit(X3 - X4))
     SD1 <- sd(na.omit(X1 - X2) - na.omit(X3 - X4))
     table2[row, 8] <-
-      paste0(format(round(D1, digits), nsmall = digits), " (", format(round(SD1, digits), nsmall = digits), ")")
+      paste0(format(round(D1, digits), nsmall = digits),
+             " (",
+             format(round(SD1, digits), nsmall = digits),
+             ")")
     
     row <- 2
     X5 <-
       pre_F1[sequence == BA]
     table2[row, 3] <-
-      paste0(format(round(mean(na.omit(X5)), digits), nsmall = digits), " (", format(round(sd(na.omit(X5)), digits), nsmall = digits), ")")
+      paste0(format(round(mean(na.omit(
+        X5
+      )), digits), nsmall = digits),
+      " (",
+      format(round(sd(na.omit(
+        X5
+      )), digits), nsmall = digits),
+      ")")
     X6 <-
       post_F1[sequence == BA]
     table2[row, 4] <-
-      paste0(format(round(mean(na.omit(X6)), digits), nsmall = digits), " (", format(round(sd(na.omit(X6)), digits), nsmall = digits), ")")
+      paste0(format(round(mean(na.omit(
+        X6
+      )), digits), nsmall = digits),
+      " (",
+      format(round(sd(na.omit(
+        X6
+      )), digits), nsmall = digits),
+      ")")
     X7 <-
       pre_F2[sequence == AB]
     table2[row, 5] <-
-      paste0(format(round(mean(na.omit(X7)), digits), nsmall = digits), " (", format(round(sd(na.omit(X7)), digits), nsmall = digits), ")")
+      paste0(format(round(mean(na.omit(
+        X7
+      )), digits), nsmall = digits),
+      " (",
+      format(round(sd(na.omit(
+        X7
+      )), digits), nsmall = digits),
+      ")")
     X8 <-
       post_F2[sequence == AB]
     table2[row, 6] <-
-      paste0(format(round(mean(na.omit(X8)), digits), nsmall = digits), " (", format(round(sd(na.omit(X8)), digits), nsmall = digits), ")")
+      paste0(format(round(mean(na.omit(
+        X8
+      )), digits), nsmall = digits),
+      " (",
+      format(round(sd(na.omit(
+        X8
+      )), digits), nsmall = digits),
+      ")")
     T2 <- mean(na.omit(X5 - X6) + na.omit(X7 - X8))
     ST2 <- sd(na.omit(X5 - X6) + na.omit(X7 - X8))
     table2[row, 7] <-
-      paste0(format(round(T2, digits), nsmall = digits), " (", format(round(ST2, digits), nsmall = digits), ")")
+      paste0(format(round(T2, digits), nsmall = digits),
+             " (",
+             format(round(ST2, digits), nsmall = digits),
+             ")")
     D2 <- mean(na.omit(X5 - X6) - na.omit(X7 - X8))
     SD2 <- sd(na.omit(X5 - X6) - na.omit(X7 - X8))
     table2[row, 8] <-
-      paste0(format(round(D2, digits), nsmall = digits), " (", format(round(SD2, digits), nsmall = digits), ")")
+      paste0(format(round(D2, digits), nsmall = digits),
+             " (",
+             format(round(SD2, digits), nsmall = digits),
+             ")")
     
     n1 <-
       sum(sequence == AB)
